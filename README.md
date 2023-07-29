@@ -126,7 +126,7 @@ bip39.validateMnemonic('basket actual')
 
 
 ``` js
-const bip39 = require('bip39')
+const bip39 = require('bitgesell-bip39')
 
 // defaults to BIP39 English word list
 // uses HEX strings for entropy
