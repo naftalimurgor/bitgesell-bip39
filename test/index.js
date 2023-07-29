@@ -1,18 +1,18 @@
-var bip39 = require('../')
-var download = require('../util/wordlists').download
-var WORDLISTS = {
+const bip39 = require('../')
+const download = require('../util/wordlists').download
+const WORDLISTS = {
   english: require('../src/wordlists/english.json'),
   japanese: require('../src/wordlists/japanese.json'),
   custom: require('./wordlist.json')
 }
 
-var vectors = require('./vectors.json')
-var test = require('tape')
+const vectors = require('./vectors.json')
+const test = require('tape')
 
 function testVector (description, wordlist, password, v, i) {
-  var ventropy = v[0]
-  var vmnemonic = v[1]
-  var vseedHex = v[2]
+  const ventropy = v[0]
+  const vmnemonic = v[1]
+  const vseedHex = v[2]
 
   test('for ' + description + '(' + i + '), ' + ventropy, function (t) {
     t.plan(6)
@@ -94,11 +94,11 @@ test('UTF8 passwords', function (t) {
   t.plan(vectors.japanese.length * 2)
 
   vectors.japanese.forEach(function (v) {
-    var vmnemonic = v[1]
-    var vseedHex = v[2]
+    const vmnemonic = v[1]
+    const vseedHex = v[2]
 
-    var password = '㍍ガバヴァぱばぐゞちぢ十人十色'
-    var normalizedPassword = 'メートルガバヴァぱばぐゞちぢ十人十色'
+    const password = '㍍ガバヴァぱばぐゞちぢ十人十色'
+    const normalizedPassword = 'メートルガバヴァぱばぐゞちぢ十人十色'
 
     t.equal(bip39.mnemonicToSeedSync(vmnemonic, password).toString('hex'), vseedHex, 'mnemonicToSeedSync normalizes passwords')
     t.equal(bip39.mnemonicToSeedSync(vmnemonic, normalizedPassword).toString('hex'), vseedHex, 'mnemonicToSeedSync leaves normalizes passwords as-is')
@@ -106,7 +106,7 @@ test('UTF8 passwords', function (t) {
 })
 
 test('generateMnemonic can vary entropy length', function (t) {
-  var words = bip39.generateMnemonic(160).split(' ')
+  const words = bip39.generateMnemonic(160).split(' ')
 
   t.plan(1)
   t.equal(words.length, 15, 'can vary generated entropy bit length')
